@@ -1,0 +1,56 @@
+    <div class="page_title">
+    	<div class="wrapper">
+            <h1>Create a Thank You Note</h1>
+        </div>
+    </div>
+
+    <div class="wrapper">
+        <form method="post" ng-if="currentUser" ng-submit="addNote()">
+        	<div>
+                <label>Your name: <span>required</span></label>
+                <input type="text" placeholder="Your name" ng-model="note.yourName" />
+                <label>Their name: <span>required</span></label>
+                <input type="text" placeholder="Their name" ng-model="note.theirName" />
+            </div>
+            <div>
+                <label>Thank you page title: <span>required</span></label>
+                <input type="text" placeholder="Page title" ng-model="note.pageTitle" />
+            </div>
+            <div>
+                <label>Thank you page content: <span>required</span></label>
+                <textarea ui-tinymce ng-model="note.pageContent"></textarea>
+            </div>
+            <!--
+            <div>
+                <label>Picture: <span>optional</span></label>
+                <input type="text" placeholder="Picture" />
+                <label>Youtube video: <span>optional</span></label>
+                <input type="text" placeholder="Youtube video" />
+            </div>
+            <div>
+                <label>Choose skin color: <span>optional</span></label>
+                <select ng-model="skinColor">
+                    <option class="skin red">Red</option>
+                    <option class="skin pink">Pink</option>
+                    <option class="skin purple">Purple</option>
+                    <option class="skin blue">Blue</option>
+                    <option class="skin green">Green</option>
+                    <option class="skin yellow">Yellow</option>
+                    <option class="skin orange">Orange</option>
+                    <option class="skin gray">Gray</option>
+                </select>
+            </div>
+            -->
+            <div class="form_actions">
+                <input class="btn red" type="submit" value="Create note" />
+            </div>
+        </form>
+
+        <div ng-if="!currentUser">
+            <p>You must be logged in to create a thank you note.</p>
+            <p>
+                <a class="btn red" href="/account/login">Login</a>
+                <a class="btn red" href="/account/register">Create Account</a>
+            </p>
+        </div>
+    </div>

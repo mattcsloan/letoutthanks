@@ -1,0 +1,19 @@
+<div class="page_title">
+	<div class="wrapper">
+		<h1>{{ title }}</h1>
+    </div>
+</div>
+<div class="wrapper" ng-init="getNotes()">
+	<div class="note" ng-repeat="note in notes">
+		<div class="note_heading">
+			<div class="note_actions">
+				<a href="./notes/{{ note._id }}">View</a>
+				<a ng-if="currentUser.username == note.username" href="./notes/edit/{{ note._id }}">Edit</a>
+			</div>
+			<h2>{{ note.pageTitle }}</h2>
+			From: {{ note.yourName }}<br>
+			To: {{ note.theirName }}
+		</div>
+		<div class="note_content" ng-bind-html="note.pageContent"></div>
+	</div>
+</div>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <base href="/" />
+    <title>Let Out Thanks</title>
+    <link href="/styles/layout.css" rel="stylesheet" />
+    <script>
+        // tinymce.init({
+        //     selector: "textarea",
+        //     theme: "modern",
+        //     height: 300,
+        //     plugins: [
+        //          "advlist autolink link lists hr wordcount paste"
+        //     ],
+        //     menubar: "format edit insert",
+        //     toolbar: "undo redo bold italic link bullist numlist", 
+        //     style_formats: [
+        //         {title: 'Large Heading', block: 'h2'},
+        //         {title: 'Medium Heading', block: 'h3'},
+        //         {title: 'Small Heading', block: 'h4'}
+        //     ]
+        // }); 
+    </script>
+    <script src="/libs/angular/angular.js"></script>
+    <script src="/libs/angular-route/angular-route.min.js"></script>
+    <script src="/libs/angular-animate/angular-animate.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.4.0.js"></script>
+    <script src="/js/tinymce/tinymce.min.js"></script>
+    <script src="/js/tinymce/tinymce.js"></script>
+    <script src="/libs/angular-sanitize/angular-sanitize.min.js"></script>
+
+    <script src="/js/controllers/NotesCtrl.js"></script>
+    <script src="/js/controllers/AccountCtrl.js"></script>
+    <script src="/js/services/NoteService.js"></script>
+    <script src="/js/services/UserService.js"></script>
+    <script src="/js/appRoutes.js"></script>
+    <script src="/js/app.js"></script>
+
+</head>
+<body class="skin red" ng-app="thankYou" ng-controller="AccountController">
+    <div class="header">
+        <div class="wrapper">
+            <a href="/"><span>Let Out Thanks</span></a>
+            <ul ng-show="currentUser" class="user_menu">
+                <li><a href="/notes/by/{{ currentUser.username }}">{{ currentUser.username }}</a>
+                    <ul>
+                        <li><a href="#">My Profile</a></li>
+                        <li><a href="/notes/by/{{ currentUser.username }}">My Notes</a></li>
+                        <li><a href="#" ng-click="logout()">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul ng-show="!currentUser" class="user_menu">
+                <li><a href="/account/login">Login</a></li>
+                <li><a href="/account/register">Register</a></li>
+            </ul>
+            <ul>
+                <li><a href="/notes">All Notes</a></li>
+                <li><a href="/notes/create">Create</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </div>
+    </div>
+    <div ng-view ng-animate></div>
+    <div class="footer">
+        <div class="wrapper">
+            <p>&copy; {{date | date:'yyyy'}} Let Out Thanks</p>
+            <ul>
+                <li><a href="#">About</a> | </li>
+                <li><a href="#">Privacy Policy</a> | </li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

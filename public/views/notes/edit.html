@@ -1,0 +1,54 @@
+    <div class="page_title">
+    	<div class="wrapper">
+            <h1>{{ title }}</h1>
+        </div>
+    </div>
+
+    <div class="wrapper" ng-init="getNote()">
+
+        <form method="post" ng-submit="editNote()" ng-if="author">
+        	<div>
+                <label>Your name: <span>required</span></label>
+                <input type="text" placeholder="Your name" ng-model="notes.yourName" />
+            </div>
+            <div>
+                <label>Their name: <span>required</span></label>
+                <input type="text" placeholder="Their name" ng-model="notes.theirName" />
+            </div>
+            <div>
+                <label>Thank you page title: <span>required</span></label>
+                <input type="text" placeholder="Page title" ng-model="notes.pageTitle" />
+            </div>
+            <div>
+                <label>Thank you page content: <span>required</span></label>
+                <textarea ui-tinymce ng-model="notes.pageContent"></textarea>
+            </div>
+            <!--
+            <div>
+                <label>Picture: <span>optional</span></label>
+                <input type="text" placeholder="Picture" />
+                <label>Youtube video: <span>optional</span></label>
+                <input type="text" placeholder="Youtube video" />
+            </div>
+            <div>
+                <label>Choose skin color: <span>optional</span></label>
+                <select ng-model="skinColor">
+                    <option class="skin red">Red</option>
+                    <option class="skin pink">Pink</option>
+                    <option class="skin purple">Purple</option>
+                    <option class="skin blue">Blue</option>
+                    <option class="skin green">Green</option>
+                    <option class="skin yellow">Yellow</option>
+                    <option class="skin orange">Orange</option>
+                    <option class="skin gray">Gray</option>
+                </select>
+            </div>
+            -->
+            <div class="form_actions">
+                <a href="#" ng-click="deleteNote()">Delete note</a>
+                <a class="btn preview white" href="" ng-click="viewUrl()">View note</a>
+                <input class="btn red" type="submit" value="Save note" />
+            </div>
+        </form>
+        <div ng-if="!author">You are not the author of this note. You only have permissions to <a href="" ng-click="viewUrl()">view</a> it.</div>
+    </div>
