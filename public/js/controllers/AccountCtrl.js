@@ -25,7 +25,7 @@ angular.module('AccountCtrl', ['ngAnimate']).controller('AccountController', ['$
 		UserSvc.createUser(email, name, username, password)
 			.then(function(response) {
 				$scope.$emit('createUser', response.data);
-				$location.url('/notes/create');
+				$location.url('/notes/by/me');
 			});
 	};
 

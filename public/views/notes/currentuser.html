@@ -4,8 +4,8 @@
     </div>
 </div>
 <div class="notes">
-	<div class="wrapper" ng-init="getNotesByUser()">
-		<div class="note" ng-repeat="note in notes">
+	<div class="wrapper" ng-init="getNotesByCurrentUser()">
+		<div class="note" ng-repeat="note in notes" ng-if="notes.length">
 			<div class="front">
 				<!--
 				<div class="note_actions">
@@ -23,6 +23,9 @@
 				</div>
 				<a class="btn" href="./notes/{{ note._id }}">View Note</a>
 			</div>
+		</div>
+		<div ng-if="!notes.length">
+			You have no notes. <a href="/notes/create">Create your first!</a>
 		</div>
 	</div>
 </div>

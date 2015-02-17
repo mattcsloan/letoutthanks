@@ -12,6 +12,10 @@ angular.module('NoteService', []).factory('NoteSvc', function($http) {
 		return $http.get('/api/notes/user/' + username);
 	},
 
+	o.getByCurrentUser = function(username) {
+		return $http.get('/api/notes/user/' + username);
+	},
+
 	o.create = function(noteData) {
 		return $http.post('/api/notes', noteData);
 	},

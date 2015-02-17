@@ -5,6 +5,7 @@
     <base href="/" />
     <title>Let Out Thanks</title>
     <link href="/styles/layout.css" rel="stylesheet" />
+    <link href="/styles/responsive.css" rel="stylesheet" />
     <script>
         // tinymce.init({
         //     selector: "textarea",
@@ -37,16 +38,24 @@
     <script src="/js/appRoutes.js"></script>
     <script src="/js/app.js"></script>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script>
+    $(document).on('click', '.note', function() {
+      $('.note.view').toggleClass('view');
+      $(this).addClass('view');
+    });
+  </script>
+
 </head>
 <body class="skin red" ng-app="thankYou" ng-controller="AccountController">
     <div class="header">
         <div class="wrapper">
             <a href="/"><span>Let Out Thanks</span></a>
             <ul ng-show="currentUser" class="user_menu">
-                <li><a href="/notes/by/{{ currentUser.username }}">{{ currentUser.username }}</a>
+                <li><a href="/notes/by/me">{{ currentUser.username }}</a>
                     <ul>
-                        <li><a href="#">My Profile</a></li>
-                        <li><a href="/notes/by/{{ currentUser.username }}">My Notes</a></li>
+                        <!--<li><a href="#">My Profile</a></li>-->
+                        <li><a href="/notes/by/me">My Notes</a></li>
                         <li><a href="#" ng-click="logout()">Logout</a></li>
                     </ul>
                 </li>

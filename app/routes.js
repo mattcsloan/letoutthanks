@@ -112,7 +112,6 @@ module.exports = function(app) {
 
 	//authentication api routing
 	app.post('/api/sessions', function(req, res, next) {
-		console.log(config.secret);
 		User.findOne({username: req.body.username})
 			.select('password').select('username')
 			.exec(function (err, user) {
@@ -146,13 +145,21 @@ module.exports = function(app) {
 			name: req.body.name,
 			email: req.body.email
 		});
-		bcrypt.hash(req.body.password, 10, function(err, hash) {
-			if(err) { return next(err); }
-			user.password = hash;
-			user.save(function(err) {
-				if(err) { return next(err); }
-				res.send(201);
-			});
+		User.findOne({username: user.username}, function(err, result) {
+		    if (err) { console.log('error determining if username already exists'); }
+
+		    if (result) {
+		        return res.send(401, 'username already exists');
+		    } else {
+				bcrypt.hash(req.body.password, 10, function(err, hash) {
+					if(err) { return next(err); }
+					user.password = hash;
+					user.save(function(err) {
+						if(err) { return next(err); }
+						res.send(201);
+					});
+				});
+		    }
 		});
 	});
 

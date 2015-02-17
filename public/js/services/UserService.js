@@ -35,9 +35,13 @@ angular.module('UserService', []).factory('UserSvc', function($http) {
 			name: name,
 			username: username,
 			password: password
-		}).then(function() {
-			return svc.login(username, password);
-		});
+		})
+			.success(function() {
+				return svc.login(username, password);
+			})
+			.error(function(response) {
+				alert('Username already exists');
+			});
 	}
 
 	return svc;

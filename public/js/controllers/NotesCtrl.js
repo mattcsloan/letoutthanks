@@ -38,6 +38,23 @@ angular.module('NotesCtrl', []).controller('NotesController', ['$scope', '$route
 			});
  	};
 
+	$scope.getNotesByCurrentUser = function() {
+		var user = $scope.currentUser.username; //curently logged in user $routeParams.user;
+		$scope.title= "My Thank You Notes";
+		NoteSvc.getByCurrentUser(user)
+			.success(function(data, status) {
+				$scope.notes = data;
+				// console.log("current user: " + $scope.currentUser.username)
+				// console.log("note's author: " + $scope.notes.username)
+				// if($scope.currentUser.username === $scope.notes.username) {
+				// 	$scope.author = true;
+				// }
+			})
+			.error(function(data, status) {
+				alert("Error");
+			});
+ 	};
+
 	$scope.getNote = function() {
 		var id = $routeParams.id;
 		$scope.title= "Edit Thank You Note";

@@ -23,6 +23,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			controller: 'NotesController'
 		})
 
+		.when('/notes/by/me', {
+			templateUrl: '../views/notes/currentuser.html',
+			controller: 'NotesController'
+		})
+
 		.when('/notes/by/:user', {
 			templateUrl: '../views/notes/user.html',
 			controller: 'NotesController'
