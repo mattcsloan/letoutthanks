@@ -17,7 +17,7 @@ angular.module('AccountCtrl', ['ngAnimate']).controller('AccountController', ['$
 		UserSvc.login(username, password)
 			.then(function(response) {
 				$scope.$emit('login', response.data);
-				$location.url('/notes/by/' + $scope.currentUser.username);
+				$location.url('/notes/by/me');
 			});
 	};
  

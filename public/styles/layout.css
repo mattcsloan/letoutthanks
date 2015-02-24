@@ -503,6 +503,33 @@ option.skin.orange	{ background: #e47b00; }
 	float: none;
 	color: #888;
 }
+
+.wrapper.note_view
+{
+  margin-top: 30px;
+  padding: 50px;
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+  width: 960px;
+}
+
+p.salutation
+{
+	margin: 0;
+	padding: 0;
+	font-size: 24px;
+	font-style: oblique;
+	margin-top: 20px;
+}
+
+p.salutation span
+{
+	display: block;
+	color: #cc0000;
+	font-weight: bold;
+	font-size: 16px;
+	font-style: normal;
+}
 /*
 .note
 {
@@ -563,7 +590,7 @@ option.skin.orange	{ background: #e47b00; }
 
     .note
     {
-      margin: 60px 25px 60px 0;
+      margin: 60px 26.66px 60px 0;
       width: 220px;
       height: 140px;
       border-radius: 4px;
@@ -607,6 +634,13 @@ option.skin.orange	{ background: #e47b00; }
       border-radius: 4px;
     }
 
+    .front
+    {
+    	display: flex;
+    	align-items: center;
+    	justify-content: center;
+    }
+
     .back
     {
       transform: rotateY(180deg);
@@ -639,7 +673,7 @@ option.skin.orange	{ background: #e47b00; }
       width: 0;
       height: 0;
       border: 0 solid transparent;
-      border-width: 100px 150px;
+      border-width: 70px 110px;
       left: 0px;
     }
 
@@ -663,15 +697,15 @@ option.skin.orange	{ background: #e47b00; }
     .paper
     {
       position: absolute;
-      width: 280px;
-      height: 200px;
+      width: 208px;
+      height: 160px;
       margin: 0 auto;
-      padding: 20px;
+      padding: 15px;
       box-sizing: border-box;
       background: #fff;
       bottom: 2%;
       box-shadow: 0 1px 1px rgba(0,0,0,0.25);
-      left: 13px;
+      left: 6px;
       transition: bottom 0.5s ease;
       overflow: hidden;
     }
@@ -689,16 +723,18 @@ option.skin.orange	{ background: #e47b00; }
     .note h1
     {
       margin: 0 auto;
-      line-height: 160px;
       text-align: center;
       color: #cc0000;
+      line-height: 1.1em;
+      font-size: 21px;
     }
 
     .note h2
     {
-      margin: 0 0 10px 0;
+      margin: 0 0 8px 0;
       color: #cc0000;
-      font-size: 18px;
+      font-size: 16px;
+      line-height: 1.2em;
     }
 
     .note h3
@@ -740,9 +776,14 @@ option.skin.orange	{ background: #e47b00; }
 
     .note .btn.edit_note
     {
-    	top: 10px;
+    	bottom: 10px;
     	right: 10px;
     	left: auto;
+    	top: auto;
+    	padding: 6px 10px;
+    	font-size: 10px;
+    	background: transparent;
+    	color: #cc0000;
     }
     .back .btn:hover
     {

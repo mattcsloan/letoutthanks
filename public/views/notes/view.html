@@ -4,9 +4,9 @@
         </div>
     </div>
 
-    <div class="wrapper" ng-init="getNote()">
-        <p>From: {{ notes.yourName }}</p>
-        <p>To: {{ notes.theirName }}</p>
+    <div class="wrapper note_view" ng-init="getNote()">
+        <h1>Dear {{ notes.theirName }},</h1>
         <div class="note_content" ng-bind-html="notes.pageContent">
         </div>
+        <p class="salutation"><span>With great appreciation,</span> {{ notes.yourName }}</p>
     </div>

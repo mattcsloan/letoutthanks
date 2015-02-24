@@ -14,7 +14,7 @@
 				</div>
 				-->
 				<h1>{{ note.theirName }}</h1>
-				<h2>{{ note.yourName }}</h2>
+				<h3>{{ note.yourName }}</h3>
 			</div>
 			<div class="back">
 				<div class="paper">
@@ -22,7 +22,7 @@
 					<div class="note_content" ng-bind-html="note.pageContent"></div>
 				</div>
 				<a class="btn" href="./notes/{{ note._id }}">View Note</a>
-				<a ng-if="currentUser.username == note.username" class="btn edit_note" href="./notes/edit/{{ note._id }}">Edit Note</a>
+				<a ng-if="currentUser.username == note.username" class="btn edit_note" href="./notes/edit/{{ note._id }}">Edit</a>
 			</div>
 		</div>
 	</div>
