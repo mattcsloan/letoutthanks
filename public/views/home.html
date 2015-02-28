@@ -1,3 +1,29 @@
 <div class="wrapper">
-	<h1>{{ title }}</h1>
+	<h1>Feeling gratitude and not expressing it is like wrapping a present and not giving it.</h1>
+	<h1>- William Arthur Ward</h1>
+</div>
+<div class="full">
+	<div class="wrapper">
+		<h3>Recent Notes</h3>
+		<p>Have a look at what others in the community are thankful for.</p>
+		<div ng-init="getRecentNotes()" class="recent_notes">
+			<div class="note view" ng-repeat="note in notes">
+				<div class="front">
+					<h1>{{ note.theirName }}</h1>
+					<h3>{{ note.yourName }}</h3>
+				</div>
+				<div class="back">
+					<div class="paper">
+						<h2>{{ note.pageTitle }}</h2>
+						<div class="note_content" ng-bind-html="note.pageContent"></div>
+					</div>
+					<a class="btn" href="./notes/{{ note._id }}">View Note</a>
+					<a ng-if="currentUser.username == note.username" class="btn edit_note" href="./notes/edit/{{ note._id }}">Edit</a>
+				</div>
+			</div>
+			<div class="note placeholder">
+				<a href="/notes">View all notes</a>
+			</div>
+		</div>
+	</div>
 </div>

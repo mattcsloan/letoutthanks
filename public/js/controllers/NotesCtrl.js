@@ -16,6 +16,16 @@ angular.module('NotesCtrl', []).controller('NotesController', ['$scope', '$route
 			});
  	};
 
+	$scope.getRecentNotes = function() {
+		NoteSvc.getRecent()
+			.success(function(data, status) {
+				$scope.notes = data;
+			})
+			.error(function(data, status) {
+				alert("Error");
+			});
+ 	};
+
  	//use websockets to push new note/edit note/delete note on All Notes page for all current user sessions
  	$scope.$on('ws:note_update', function(_, note) {
 		$scope.getNotes();

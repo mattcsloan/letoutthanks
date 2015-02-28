@@ -41,6 +41,16 @@ module.exports = function(app) {
 		//}
 	});
 
+	app.get('/api/notes/recent', function(req, res) {
+		// use mongoose to get all notes in the database
+		Notes.find().limit(3).exec(function(err, notes) {
+			if(err) {
+				res.send(err);
+			}
+			res.json(notes);
+		});
+	});
+
 	app.get('/api/notes/user/:username', function(req, res) {
 		var username = req.params.username;
 
@@ -158,6 +168,47 @@ module.exports = function(app) {
 						if(err) { return next(err); }
 						res.send(201);
 					});
+				});
+		    }
+		});
+	});
+
+	app.post('/api/users/reset', function(req, res, next) {
+		User.findOne({username: req.body.username}, function(err, result) {
+		    if (err) { console.log('error resetting password'); }
+
+		    if (!result) {
+		        return res.send(401, "username doesn't exist");
+		    } else {
+
+		    	//TO DO: Check if curent password is correct before changing (whether from email reset or logged=in reset)
+
+		    	var user = result;
+
+				bcrypt.hash(req.body.newPassword, 10, function(err, hash) {
+					if(err) { return next(err); }
+					user.password = hash;
+					user.update({password: user.password}, function(err) {
+						if(err) { return next(err); }
+						res.send(201);
+					});
+				});
+		    }
+		});
+	});
+
+	app.post('/api/users/forgot', function(req, res, next) {
+		User.findOne({username: req.body.username}, function(err, result) {
+		    if (err) { console.log('error finding user to send forgot username email'); }
+
+		    if (!result) {
+		        return res.send(401, "username doesn't exist");
+		    } else {
+		    	var user = result;
+
+				user.update({resetPasswordToken: 'testing'}, function(err) {
+					if(err) { return next(err); }
+					res.send(201);
 				});
 		    }
 		});

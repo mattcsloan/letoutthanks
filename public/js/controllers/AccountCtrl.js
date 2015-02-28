@@ -29,6 +29,20 @@ angular.module('AccountCtrl', ['ngAnimate']).controller('AccountController', ['$
 			});
 	};
 
+	$scope.resetPassword = function(username, password, newPassword) {
+		UserSvc.resetPassword(username, password, newPassword)
+			.then(function(response) {
+				$location.url('/account');
+			});
+	};
+
+	$scope.forgotPassword = function(username) {
+		UserSvc.forgotPassword(username)
+			.then(function(response) {
+				$location.url('/account/reset-password');
+			});
+	};
+
 	//display user's account in header if logged in
 	$scope.$on('login', function(_, user) {
 		$scope.currentUser = user;

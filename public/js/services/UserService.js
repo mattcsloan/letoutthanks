@@ -30,19 +30,40 @@ angular.module('UserService', []).factory('UserSvc', function($http) {
 	}
 
 	svc.createUser = function(email, name, username, password) {
-		return $http.post('/api/users', {
-			email: email,
-			name: name,
-			username: username,
-			password: password
-		})
+		username = username.toLowerCase();
+		if(username === "me") {
+				alert('Username already exists');
+		} else {
+			return $http.post('/api/users', {
+				email: email,
+				name: name,
+				username: username,
+				password: password
+			})
 			.success(function() {
 				return svc.login(username, password);
 			})
 			.error(function(response) {
 				alert('Username already exists');
 			});
+		}
 	}
+	
+	svc.resetPassword = function(username, password, newPassword) {
+		return $http.post('/api/users/reset', {
+			username: username,
+			password: password,
+			newPassword: newPassword
+		});
+	}
+
+	svc.forgotPassword = function(username) {
+		return $http.post('/api/users/forgot', {
+			username: username
+		});
+	}
+
+	
 
 	return svc;
 });

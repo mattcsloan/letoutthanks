@@ -1,12 +1,28 @@
 angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	$routeProvider
 		.when('/', {
-			templateUrl: '../views/home.html'
+			templateUrl: '../views/home.html',
+			controller: 'NotesController'
 		})
 
 		.when('/account/login', {
 			title: 'Login',
 			templateUrl: '../views/account/login.html'
+		})
+
+		.when('/account/reset-password', {
+			title: 'Reset Your Password',
+			templateUrl: '../views/account/password-reset.html'
+		})
+
+		.when('/account/forgot', {
+			title: 'Reset Your Password',
+			templateUrl: '../views/account/password-forgot.html'
+		})
+
+		.when('/account', {
+			title: 'My Account',
+			templateUrl: '../views/account/index.html'
 		})
 
 		.when('/account/register', {

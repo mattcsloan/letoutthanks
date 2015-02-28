@@ -41,8 +41,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script>
     $(document).on('click', '.note', function() {
-      $('.note.view').toggleClass('view');
-      $(this).addClass('view');
+        if(!$(this).parent().hasClass('recent_notes')) {
+            $('.note.view').toggleClass('view');
+            $(this).addClass('view');
+            return false;
+        }
     });
   </script>
 
@@ -54,7 +57,7 @@
             <ul ng-show="currentUser" class="user_menu">
                 <li><a href="/notes/by/me">{{ currentUser.username }}</a>
                     <ul>
-                        <!--<li><a href="#">My Profile</a></li>-->
+                        <li><a href="/account">My Account</a></li>
                         <li><a href="/notes/by/me">My Notes</a></li>
                         <li><a href="#" ng-click="logout()">Logout</a></li>
                     </ul>
@@ -71,12 +74,12 @@
             </ul>
         </div>
     </div>
-    <div ng-view ng-animate></div>
+    <div class="container" ng-view ng-animate></div>
     <div class="footer">
         <div class="wrapper">
             <p>&copy; {{date | date:'yyyy'}} Let Out Thanks</p>
             <ul>
-                <li><a href="#">About</a> | </li>
+                <li><a href="/about">About</a> | </li>
                 <li><a href="#">Privacy Policy</a> | </li>
                 <li><a href="#">Contact</a></li>
             </ul>

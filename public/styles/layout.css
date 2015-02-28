@@ -36,6 +36,7 @@ h1, h2
 h2
 {
 	font-size: 18px;
+    color: #cc0000;
 }
 
 img
@@ -147,6 +148,17 @@ p
 	display: block;
 }
 
+.container
+{
+	background: #eee;
+}
+
+.full
+{
+	border-top: 2px solid #ddd;
+	background: #fcfcfc;
+}
+
 .wrapper
 {
 	width: 1000px;
@@ -161,6 +173,26 @@ p
 	width: 760px;
 	font-size: 19px;
 	line-height: 1.7em;
+}
+
+form.single
+{
+	max-width: 272px;
+	margin: 20px auto;
+	padding: 40px;
+	background: rgba(255,255,255,0.3);
+	border: 1px solid #ccc;
+	box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+}
+
+form.single.inline
+{
+	max-width: 482px;
+}
+
+form.single.inline label
+{
+	width: 200px;
 }
 
 .wrapper:after, form div:after
@@ -263,6 +295,11 @@ input[type=submit]
 	line-height: 1em;
 }
 
+form
+{
+	margin-bottom: 15px;
+}
+
 form div
 {
 	display: block;
@@ -273,7 +310,7 @@ form div
 label
 {
 	font-weight: bold;
-	font-size: 21px;
+	font-size: 19px;
 	float: left;
 	margin: 0 10px 10px 0;
 	clear: left;
@@ -373,11 +410,28 @@ option.skin.orange	{ background: #e47b00; }
 	font-size: 14px;
 }
 
+.form_actions.inline
+{
+	border-top: none;
+	text-align: left;
+}
+
 .form_actions .btn, .form_actions input[type=submit]
 {
 	margin-left: 15px;	
 	clear: none;
 	display: inline;
+}
+
+.form_actions.inline .btn, .form_actions.inline input[type=submit]
+{
+	margin: 0 15px 0 0;
+}
+
+.form_actions .btn.right
+{
+	float: right;
+	margin-right: 0;
 }
 
 .mce-path
@@ -578,7 +632,7 @@ p.salutation span
       background: #eee;
     }
 
-    .notes .wrapper
+    .notes .wrapper, .recent_notes
     {
       display: flex;
       align-content: space-between;
@@ -586,6 +640,12 @@ p.salutation span
       flex-wrap: wrap;
       padding-top: 80px;
       padding-bottom: 80px;
+    }
+
+    .recent_notes
+    {
+      padding-top: 20px;
+      padding-bottom: 20px;
     }
 
     .note
@@ -599,6 +659,7 @@ p.salutation span
       position: relative;
       transform-style: preserve-3d;
       transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-sizing: border-box;
       /*flex: 0 0 29.3333%;*/
     }
 
@@ -611,6 +672,26 @@ p.salutation span
     {
       margin-top: 50px;
       box-shadow: 0 12px 16px rgba(0,0,0,0.08);
+    }
+
+    .note.placeholder, .note.placeholder:hover
+    {
+    	background: #f6f6f6;
+    	box-shadow: none;
+    	text-align: center;
+    	line-height: 140px;
+    	border: 1px solid #ddd;
+    	margin-top: 60px;
+    }
+
+    .note.placeholder a
+    {
+    	color: #777;
+    }
+
+    .note.placeholder a:hover
+    {
+    	color: #cc0000;
     }
 
     /* http://codepen.io/colebemis/pen/IlgFx */
@@ -732,7 +813,6 @@ p.salutation span
     .note h2
     {
       margin: 0 0 8px 0;
-      color: #cc0000;
       font-size: 16px;
       line-height: 1.2em;
     }

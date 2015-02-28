@@ -4,11 +4,14 @@
     </div>
 </div>
 <div class="wrapper">
-	<form ng-submit="login(username, password)">
+	<form class="single inline" ng-submit="login(username, password)">
 		<label>Username:</label>
 		<input type="text" ng-model="username" />
 		<label>Password:</label>
 		<input type="password" ng-model="password" />
-		<input type="submit" value="Login" />
+		<div class="form_actions inline">
+			<input type="submit" value="Login" />
+			<a class="btn white right" href="/account/forgot">Forgot password?</a>
+		</div>
 	</form>
 </div>

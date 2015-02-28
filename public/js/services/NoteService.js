@@ -8,6 +8,10 @@ angular.module('NoteService', []).factory('NoteSvc', function($http) {
 		return $http.get('/api/notes');
 	},
 
+	o.getRecent = function() {
+		return $http.get('/api/notes/recent');
+	},
+
 	o.getByUser = function(username) {
 		return $http.get('/api/notes/user/' + username);
 	},
