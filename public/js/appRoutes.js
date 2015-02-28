@@ -15,6 +15,11 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			templateUrl: '../views/account/password-reset.html'
 		})
 
+		.when('/account/sent-password', {
+			title: 'A new password has been sent!',
+			templateUrl: '../views/account/password-sent.html'
+		})
+
 		.when('/account/forgot', {
 			title: 'Reset Your Password',
 			templateUrl: '../views/account/password-forgot.html'
@@ -32,6 +37,14 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 
 		.when('/about', {
 			templateUrl: '../views/about/index.html'
+		})
+
+		.when('/privacy', {
+			templateUrl: '../views/privacy.html'
+		})
+
+		.when('/contact', {
+			templateUrl: '../views/contact.html'
 		})
 
 		.when('/notes', {

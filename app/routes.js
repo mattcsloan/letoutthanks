@@ -5,6 +5,8 @@ var jwt = require('jwt-simple');
 var config = require('../config/db');
 var auth = require('./auth');
 var websockets = require('./websockets');
+var emails = require('./emails');
+var nodemailer = require('nodemailer');
 
 module.exports = function(app) {
 	// server routes
@@ -174,27 +176,40 @@ module.exports = function(app) {
 	});
 
 	app.post('/api/users/reset', function(req, res, next) {
-		User.findOne({username: req.body.username}, function(err, result) {
-		    if (err) { console.log('error resetting password'); }
+		User.findOne({username: req.body.username})
+			.select('password').select('username').select('resetPasswordToken')
+			.exec(function (err, user) {
+			    if (err) { console.log('error resetting password'); }
 
-		    if (!result) {
-		        return res.send(401, "username doesn't exist");
-		    } else {
+			    if (!user) {
+			        return res.send(401, "username doesn't exist");
+			    } else {
+			    	//check if they're using the temporary password/token provided via email
+			    	if(user.resetPasswordToken === req.body.password) {
+			    		resetPassword();
+			    	} else {
+			    		//check if they know the current password
+				    	bcrypt.compare(req.body.password, user.password, function(err, valid) {
+				    		if(valid) {
+				    			resetPassword();
+				    		} else {
+					    		return res.send(401, "current password is incorrect");
+				    		}
+				    	});
+			    	}
 
-		    	//TO DO: Check if curent password is correct before changing (whether from email reset or logged=in reset)
-
-		    	var user = result;
-
-				bcrypt.hash(req.body.newPassword, 10, function(err, hash) {
-					if(err) { return next(err); }
-					user.password = hash;
-					user.update({password: user.password}, function(err) {
-						if(err) { return next(err); }
-						res.send(201);
-					});
-				});
-		    }
-		});
+			    	function resetPassword() {
+						bcrypt.hash(req.body.newPassword, 10, function(err, hash) {
+							if(err) { return next(err); }
+							user.password = hash;
+							user.update({password: user.password}, function(err) {
+								if(err) { return next(err); }
+								res.send(201);
+							});
+						});
+			    	}
+			    }
+			});
 	});
 
 	app.post('/api/users/forgot', function(req, res, next) {
@@ -206,7 +221,36 @@ module.exports = function(app) {
 		    } else {
 		    	var user = result;
 
-				user.update({resetPasswordToken: 'testing'}, function(err) {
+		    	var temporaryToken = Math.random().toString(36).slice(-14);
+
+				// create reusable transporter object using SMTP transport
+				var transporter = nodemailer.createTransport({
+				    service: 'Gmail',
+				    auth: {
+				        user: 'letoutthanks@gmail.com',
+				        pass: 'L3ToutTh4nks'
+				    }
+				});
+
+				// setup e-mail data with unicode symbols
+				var mailOptions = {
+				    from: 'Let Out Thanks<letoutthanks@gmail.com>', // sender address
+				    to: user.email, // list of receivers
+				    subject: 'Reset Your Password', // Subject line
+				    html: '<br><b style="color: #cc0000;">A password reset request has been received</b><br><br>Hello ' + user.name + ',<br><br>Please use the following temporary password to login and update your password:<br> <b>' + temporaryToken + '</b><br><br>You can complete the reset process by visiting:<br> <a href="http://letoutthanks.com/account/reset-password" style="color: #cc0000;">http://letoutthanks.com/account/reset-password</a>' // html body
+				};
+
+				// send mail with defined transport object
+				transporter.sendMail(mailOptions, function(error, info){
+				    if(error){
+				        console.log(error);
+				    }else{
+				        console.log('Message sent: ' + info.response);
+				    }
+				});
+
+
+				user.update({resetPasswordToken: temporaryToken}, function(err) {
 					if(err) { return next(err); }
 					res.send(201);
 				});

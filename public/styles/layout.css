@@ -175,7 +175,7 @@ p
 	line-height: 1.7em;
 }
 
-form.single
+.wrapper .single, form.single
 {
 	max-width: 272px;
 	margin: 20px auto;
@@ -185,7 +185,7 @@ form.single
 	box-shadow: 0 3px 8px rgba(0,0,0,0.05);
 }
 
-form.single.inline
+.wrapper .single.inline, form.single.inline
 {
 	max-width: 482px;
 }

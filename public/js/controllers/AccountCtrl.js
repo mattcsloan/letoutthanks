@@ -24,22 +24,21 @@ angular.module('AccountCtrl', ['ngAnimate']).controller('AccountController', ['$
 	$scope.createUser = function(email, name, username, password) {
 		UserSvc.createUser(email, name, username, password)
 			.then(function(response) {
-				$scope.$emit('createUser', response.data);
-				$location.url('/notes/by/me');
+				$scope.login(username, password);
 			});
 	};
 
 	$scope.resetPassword = function(username, password, newPassword) {
 		UserSvc.resetPassword(username, password, newPassword)
 			.then(function(response) {
-				$location.url('/account');
+				$scope.login(username, newPassword);
 			});
 	};
 
 	$scope.forgotPassword = function(username) {
 		UserSvc.forgotPassword(username)
 			.then(function(response) {
-				$location.url('/account/reset-password');
+				$location.url('/account/sent-password');
 			});
 	};
 
