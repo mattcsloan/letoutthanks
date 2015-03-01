@@ -190,9 +190,9 @@ p
 	max-width: 482px;
 }
 
-form.single.inline label
+label
 {
-	width: 200px;
+	min-width: 200px;
 }
 
 .wrapper:after, form div:after
@@ -307,6 +307,18 @@ form div
 	clear: both;
 }
 
+form .error_message
+{
+	margin: 10px 0 0 0;
+	color: #cc0000;
+	font-weight: bold;
+	font-style: oblique;
+	padding: 6px 20px;
+	border-radius: 4px;
+	border: 1px solid #cc0000;
+	display: block;
+}
+
 label
 {
 	font-weight: bold;
@@ -326,7 +338,7 @@ label span
 	line-height: 1em;
 }
 
-input[type=text], input[type=password]
+input[type=text], input[type=password], input[type=text].ng-invalid.ng-pristine, input[type=password].ng-invalid.ng-pristine
 {
 	padding: 4px 6px;
 	background: rgba(255,255,255,0.5);
@@ -338,6 +350,13 @@ input[type=text], input[type=password]
 	min-width: 260px;
 	display: inline-block;
 	margin-bottom: 20px;
+	box-shadow: none;
+}
+
+input[type=text].ng-invalid, input[type=password].ng-invalid
+{
+	border-top: 1px solid #cc0000;
+	border-bottom: 1px solid #cc0000;
 }
 
 input[type=text]:focus, input[type=password]:focus
@@ -442,6 +461,14 @@ option.skin.orange	{ background: #e47b00; }
 .mce-wordcount
 {
 	color: #bbb !important;	
+}
+
+textarea[ng-model="note.pageContent"]
+{
+	display: block !important;
+	visibility: hidden;
+	height: 0;
+	margin: -40px 0 0 20px;
 }
 
 .footer

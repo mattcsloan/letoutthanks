@@ -64,7 +64,6 @@ module.exports = function(app) {
 		 		res.send(err);
 		 	} 
 		  	if (notes) {
-				console.log('notes:' + notes);
 	  			res.json(201, notes); 
 		  	}
 		});
@@ -128,12 +127,11 @@ module.exports = function(app) {
 			.select('password').select('username')
 			.exec(function (err, user) {
 				if(err) { return next(err); }
-				if(!user) { return res.send(401); }
+				if(!user) { return res.send(401, "username does not exist"); }
 				bcrypt.compare(req.body.password, user.password, function(err, valid) {
 					if(err) { return next(err); }
-					if(!valid) { return res.send(401); }
+					if(!valid) { return res.send(401, 'The password entered does not match our records. Please try again.'); }
 					var token = jwt.encode({username: user.username}, config.secret);
-					console.log(token);
 					res.send(token);
 				});
 			});
@@ -141,7 +139,6 @@ module.exports = function(app) {
 
 	app.get('/api/users', function(req, res, next) {
 		if(!req.headers['x-auth']) {
-			console.log('req.headers is not x-auth');
 			return res.send(401);
 		}
 		var auth = jwt.decode(req.headers['x-auth'], config.secret);
@@ -161,7 +158,7 @@ module.exports = function(app) {
 		    if (err) { console.log('error determining if username already exists'); }
 
 		    if (result) {
-		        return res.send(401, 'username already exists');
+		        return res.send(401, 'Username already exists. Please try again.');
 		    } else {
 				bcrypt.hash(req.body.password, 10, function(err, hash) {
 					if(err) { return next(err); }
@@ -182,7 +179,7 @@ module.exports = function(app) {
 			    if (err) { console.log('error resetting password'); }
 
 			    if (!user) {
-			        return res.send(401, "username doesn't exist");
+			        return res.send(401, "This username doesn't exist.");
 			    } else {
 			    	//check if they're using the temporary password/token provided via email
 			    	if(user.resetPasswordToken === req.body.password) {
@@ -193,7 +190,7 @@ module.exports = function(app) {
 				    		if(valid) {
 				    			resetPassword();
 				    		} else {
-					    		return res.send(401, "current password is incorrect");
+					    		return res.send(401, "Current password is incorrect. This must match either your current username or the temporary password that we emailed you upon request.");
 				    		}
 				    	});
 			    	}
@@ -217,7 +214,7 @@ module.exports = function(app) {
 		    if (err) { console.log('error finding user to send forgot username email'); }
 
 		    if (!result) {
-		        return res.send(401, "username doesn't exist");
+		        return res.send(401, "This username doesn't exist.");
 		    } else {
 		    	var user = result;
 

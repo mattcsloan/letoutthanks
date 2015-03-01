@@ -5,13 +5,16 @@
 </div>
 <div class="wrapper">
 	<form class="single inline" ng-submit="login(username, password)">
-		<label>Username:</label>
-		<input type="text" ng-model="username" />
-		<label>Password:</label>
-		<input type="password" ng-model="password" />
+		<label>Username: <span>required</span></label>
+		<input type="text" ng-model="username" required />
+		<label>Password: <span>required</span></label>
+		<input type="password" ng-model="password" required />
 		<div class="form_actions inline">
 			<input type="submit" value="Login" />
 			<a class="btn white right" href="/account/forgot">Forgot password?</a>
+		</div>
+		<div class="error_message" ng-if="errormessage">
+			{{ errormessage }}
 		</div>
 	</form>
 </div>

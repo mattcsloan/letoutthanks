@@ -5,18 +5,22 @@
 </div>
 <div class="wrapper">
 	<form class="single inline" ng-submit="createUser(email, name, username, password)">
-		<label>Email Address:</label>
-		<input type="text" ng-model="email" />
-		<label>Name:</label>
-		<input type="text" ng-model="name" />
-		<label>Username:</label>
-		<input type="text" ng-model="username" />
-		<label>Password:</label>
-		<input type="password" ng-model="password" />
+		<label>Email Address: <span>required</span></label>
+		<input type="text" ng-model="email" required />
+		<label>Name: <span>required</span></label>
+		<input type="text" ng-model="name" required />
+		<label>Username: <span>required</span></label>
+		<input type="text" ng-model="username" required />
+		<label>Password: <span>required</span></label>
+		<input type="password" ng-model="password" required />
 		<!--
 		<label>Confirm Password:</label>
 		<input type="password" ng-model="confirmpassword" />
 		-->
 		<input type="submit" value="Register" />
+
+		<div class="error_message" ng-if="errormessage">
+			{{ errormessage }}
+		</div>
 	</form>
 </div>

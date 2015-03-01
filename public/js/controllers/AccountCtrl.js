@@ -1,6 +1,7 @@
 angular.module('AccountCtrl', ['ngAnimate']).controller('AccountController', ['$scope', '$location', 'UserSvc', '$http', function($scope, $location, UserSvc, $http) {
 	$scope.title= "Home";
 	$scope.date = new Date();
+	$scope.errormessage = '';
 
 	//check to see if user is logged in when app starts
 	if(window.localStorage.token) {
@@ -18,27 +19,38 @@ angular.module('AccountCtrl', ['ngAnimate']).controller('AccountController', ['$
 			.then(function(response) {
 				$scope.$emit('login', response.data);
 				$location.url('/notes/by/me');
+			}, function(response) {
+				$scope.errormessage = response.data;
 			});
 	};
  
 	$scope.createUser = function(email, name, username, password) {
 		UserSvc.createUser(email, name, username, password)
-			.then(function(response) {
+			.success(function(response) {
 				$scope.login(username, password);
+			})
+			.error(function(response) {
+				$scope.errormessage = response;
 			});
 	};
 
 	$scope.resetPassword = function(username, password, newPassword) {
 		UserSvc.resetPassword(username, password, newPassword)
-			.then(function(response) {
+			.success(function(response) {
 				$scope.login(username, newPassword);
+			})
+			.error(function(response) {
+				$scope.errormessage = response;
 			});
 	};
 
 	$scope.forgotPassword = function(username) {
 		UserSvc.forgotPassword(username)
-			.then(function(response) {
+			.success(function(response) {
 				$location.url('/account/sent-password');
+			})
+			.error(function(response) {
+				$scope.errormessage = response;
 			});
 	};
 
@@ -58,4 +70,9 @@ angular.module('AccountCtrl', ['ngAnimate']).controller('AccountController', ['$
  		$scope.$emit('logout', null);
 		$location.url('/account/login');
 	};
+
+	$scope.$on('$routeChangeSuccess', function () {
+		$scope.errormessage = '';
+	});
+
 }]);

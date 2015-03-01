@@ -8,17 +8,17 @@
         <form method="post" ng-if="currentUser" ng-submit="addNote()">
         	<div>
                 <label>Your name: <span>required</span></label>
-                <input type="text" placeholder="Your name" ng-model="note.yourName" />
+                <input type="text" placeholder="Your name" ng-model="note.yourName" required />
                 <label>Their name: <span>required</span></label>
-                <input type="text" placeholder="Their name" ng-model="note.theirName" />
+                <input type="text" placeholder="Their name" ng-model="note.theirName" required />
             </div>
             <div>
                 <label>Thank you page title: <span>required</span></label>
-                <input type="text" placeholder="Page title" ng-model="note.pageTitle" />
+                <input type="text" placeholder="Page title" ng-model="note.pageTitle" required />
             </div>
             <div>
                 <label>Thank you page content: <span>required</span></label>
-                <textarea ui-tinymce ng-model="note.pageContent"></textarea>
+                <textarea ui-tinymce ng-model="note.pageContent" required></textarea>
             </div>
             <!--
             <div>

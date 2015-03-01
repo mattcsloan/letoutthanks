@@ -12,7 +12,7 @@ angular.module('NotesCtrl', []).controller('NotesController', ['$scope', '$route
 				// }
 			})
 			.error(function(data, status) {
-				alert("Error");
+				alert("Error retreiving notes");
 			});
  	};
 
@@ -22,7 +22,7 @@ angular.module('NotesCtrl', []).controller('NotesController', ['$scope', '$route
 				$scope.notes = data;
 			})
 			.error(function(data, status) {
-				alert("Error");
+				alert("Error retreiving latest notes");
 			});
  	};
 
@@ -44,7 +44,7 @@ angular.module('NotesCtrl', []).controller('NotesController', ['$scope', '$route
 				// }
 			})
 			.error(function(data, status) {
-				alert("Error");
+				alert("Error retreiving notes by " + user);
 			});
  	};
 
@@ -61,7 +61,7 @@ angular.module('NotesCtrl', []).controller('NotesController', ['$scope', '$route
 				// }
 			})
 			.error(function(data, status) {
-				alert("Error");
+				alert("Error retreiving your notes");
 			});
  	};
 
@@ -78,7 +78,7 @@ angular.module('NotesCtrl', []).controller('NotesController', ['$scope', '$route
 				}
 			})
 			.error(function(data, status) {
-				alert("Error");
+				alert("Error retreiving note");
 			});
  	};
 
