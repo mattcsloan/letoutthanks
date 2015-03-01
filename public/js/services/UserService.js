@@ -5,10 +5,6 @@ angular.module('UserService', []).factory('UserSvc', function($http) {
 	svc.getUser = function() {
 		return $http.get('/api/users', {
 			headers: { 'X-Auth': window.localStorage.token }
-		// }).then(function(val) {
-		// 	console.log(window.localStorage.token);
-		// 	$http.defaults.headers.common['X-Auth'] = window.localStorage.token;
-		// 	return val.data;
 		});
 	}
 
@@ -32,7 +28,7 @@ angular.module('UserService', []).factory('UserSvc', function($http) {
 	svc.createUser = function(email, name, username, password) {
 		username = username.toLowerCase();
 		if(username === "me") {
-				alert('Username already exists');
+				console.log('Username already exists');
 		} else {
 			return $http.post('/api/users', {
 				email: email,
@@ -44,7 +40,7 @@ angular.module('UserService', []).factory('UserSvc', function($http) {
 				return svc.login(username, password);
 			})
 			.error(function(response) {
-				alert('Username already exists');
+				console.log('Username already exists');
 			});
 		}
 	}

@@ -5,11 +5,6 @@ angular.module('NotesCtrl', []).controller('NotesController', ['$scope', '$route
 		NoteSvc.get()
 			.success(function(data, status) {
 				$scope.notes = data;
-				// console.log("current user: " + $scope.currentUser.username)
-				// console.log("note's author: " + $scope.notes.username)
-				// if($scope.currentUser.username === $scope.notes.username) {
-				// 	$scope.author = true;
-				// }
 			})
 			.error(function(data, status) {
 				alert("Error retreiving notes");
@@ -37,11 +32,6 @@ angular.module('NotesCtrl', []).controller('NotesController', ['$scope', '$route
 		NoteSvc.getByUser(user)
 			.success(function(data, status) {
 				$scope.notes = data;
-				// console.log("current user: " + $scope.currentUser.username)
-				// console.log("note's author: " + $scope.notes.username)
-				// if($scope.currentUser.username === $scope.notes.username) {
-				// 	$scope.author = true;
-				// }
 			})
 			.error(function(data, status) {
 				alert("Error retreiving notes by " + user);
@@ -54,11 +44,6 @@ angular.module('NotesCtrl', []).controller('NotesController', ['$scope', '$route
 		NoteSvc.getByCurrentUser(user)
 			.success(function(data, status) {
 				$scope.notes = data;
-				// console.log("current user: " + $scope.currentUser.username)
-				// console.log("note's author: " + $scope.notes.username)
-				// if($scope.currentUser.username === $scope.notes.username) {
-				// 	$scope.author = true;
-				// }
 			})
 			.error(function(data, status) {
 				alert("Error retreiving your notes");
@@ -70,10 +55,12 @@ angular.module('NotesCtrl', []).controller('NotesController', ['$scope', '$route
 		$scope.title= "Edit Thank You Note";
 		NoteSvc.getNote(id)
 			.success(function(data, status) {
-				$scope.notes = data;
-				console.log("current user: " + $scope.currentUser.username)
-				console.log("note's author: " + $scope.notes.username)
-				if($scope.currentUser.username === $scope.notes.username) {
+				if(data.name === "CastError") {
+				$scope.notes = "error";
+				} else {
+					$scope.notes = data;
+				}
+				if($scope.currentUser && $scope.currentUser.username === $scope.notes.username) {
 					$scope.author = true;
 				}
 			})

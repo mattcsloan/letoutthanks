@@ -75,6 +75,10 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 		.when('/notes/:id', {
 			templateUrl: '../views/notes/view.html',
 			controller: 'NotesController'
+		})
+
+		.otherwise({
+			templateUrl:'../views/404.html'
 		});
 
 	$locationProvider.html5Mode(true);

@@ -7,3 +7,9 @@
     margin-right: 0;
   }
 }
+@media (max-width: 650px) {
+	.hero
+	{
+		padding: 0;
+	}
+}

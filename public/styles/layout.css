@@ -39,6 +39,12 @@ h2
     color: #cc0000;
 }
 
+hr
+{
+	border: none;
+	border-top: 1px solid #ddd;
+}
+
 img
 {
 	max-width: 100% !important;	
@@ -47,7 +53,7 @@ img
 
 p
 {
-	margin: 0 0 16px 0;	
+	margin: 0 0 20px 0;	
 }
 
 .header
@@ -86,6 +92,7 @@ p
 {
 	border-left: 1px solid #f3f3f3;
 	border-right: 1px solid #f3f3f3;
+	z-index: 101;
 }
 
 .header ul ul
@@ -286,6 +293,11 @@ input[type=submit]
 {
 	background: #fff;
 	color: #777;
+}
+
+.btn.logout
+{
+	float: right;
 }
 
 .page_title h1
@@ -519,6 +531,41 @@ textarea[ng-model="note.pageContent"]
 .yellow .skin_color	{ color: #e4c100; }
 .orange .skin_color	{ color: #e47b00; }
 
+.hero
+{
+	background: #111;
+	color: #fff;
+	padding: 90px 0;
+	border-top: 4px solid #cc0000;
+	text-align: center;
+}
+
+.hero h1, .hero h6
+{
+	font-weight: normal;
+	font-style: oblique;
+	color: rgba(255,255,255,0.5);
+	margin: 6px 0;
+}
+
+.hero p
+{
+	display: block;
+	margin-bottom: 20px;
+	font-size: 21px;
+}
+
+.hero hr
+{
+	border-color: rgba(255,255,255,0.2);
+	margin: 30px 0;
+	padding: 0;
+}
+
+.hero .form_actions
+{
+	text-align: center;
+}
 /* ======================================================= */
 /* ======================================================= */
 /* ================ Thank you note page ================== */
@@ -677,17 +724,19 @@ p.salutation span
 
     .note
     {
-      margin: 60px 26.66px 60px 0;
-      width: 220px;
-      height: 140px;
-      border-radius: 4px;
-      background: #fff;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-      position: relative;
-      transform-style: preserve-3d;
-      transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      box-sizing: border-box;
-      /*flex: 0 0 29.3333%;*/
+		margin: 60px 26.66px 60px 0;
+		width: 220px;
+		height: 140px;
+		border-radius: 4px;
+		background: #fff;
+		box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+		position: relative;
+		transform-style: preserve-3d;
+		transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+		box-sizing: border-box;
+		-webkit-backface-visibility: hidden; /* Chrome, Safari, Opera */
+		backface-visibility: hidden;
+		/*flex: 0 0 29.3333%;*/
     }
 
     .note:nth-child(4n)
@@ -697,9 +746,17 @@ p.salutation span
 
     .note:hover
     {
-      margin-top: 50px;
-      box-shadow: 0 12px 16px rgba(0,0,0,0.08);
+		margin-top: 50px;
+		box-shadow: 0 12px 16px rgba(0,0,0,0.08);
     }
+
+    .note.ng-enter, .note.ng-leave, .note.ng-animate /* fixes issue of ng animations added to ng-repeat */
+    {
+		-webkit-transition: none !important;
+		transition: none !important;
+		--webkit-animation: none 0s !important;
+		animation: none 0s !important;
+	} 
 
     .note.placeholder, .note.placeholder:hover
     {
@@ -732,14 +789,16 @@ p.salutation span
     {
       position: absolute;
       width: 100%;
+      width: 220px;
       height: 100%;
       top: 0;
       left: 0;
       padding: 20px;
       background: #fafafa;
-      backface-visibility: hidden;
+	  backface-visibility: hidden;
       box-sizing: border-box;
       border-radius: 4px;
+
     }
 
     .front
@@ -758,6 +817,11 @@ p.salutation span
     .front:hover
     {
       cursor: pointer;
+    }
+
+    .note.view .front
+    {
+    	display: none; /* fixes chrome issue not reading backface-visibility: hidden; */
     }
 
     .front:before /* stamp */
@@ -898,6 +962,25 @@ p.salutation span
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
 
+.card
+{
+	background: #fff;
+	box-shadow: 0 2px 2px rgba(0,0,0,0.03);
+	padding: 20px;
+	border: 1px solid #ddd;
+	margin: 0 20px 20px 0;
+	width: 240px;
+	float: left;
+	font-size: 14px;
+}
+
+.card h2
+{
+	color: #555;
+	margin: 0 0 16px 0;
+}
+
+
 @keyframes scaleUp {
     from    { opacity: 0.3; -webkit-transform: scale(0.8); }
 }
@@ -914,11 +997,19 @@ p.salutation span
     to      { transform: translateY(0); }
 }
 
+@-webkit-keyframes fadeOut {
+    from    { opacity: 1; }
+    to      { opacity: 0; }
+}
 @keyframes fadeOut {
     from    { opacity: 1; }
     to      { opacity: 0; }
 }
 
+@-webkit-keyframes fadeIn {
+    from    { opacity: 0; }
+    to      { opacity: 1; }
+}
 @keyframes fadeIn {
     from    { opacity: 0; }
     to      { opacity: 1; }
@@ -933,5 +1024,5 @@ p.salutation span
     to { transform: scale(1.5); opacity: 0; }
 }
 
-.ng-enter           { animation: fadeIn 0.2s both ease-in-out; z-index: 8888; position: absolute; width: 100%; }
-.ng-leave           { animation: fadeOut 0.4s both ease-in-out; z-index: 9999; position: absolute; width: 100%; }
+.ng-enter           { -webkit-animation: fadeIn 0.2s both ease-in-out; animation: fadeIn 0.2s both ease-in-out; z-index: 8888; position: absolute; width: 100%; }
+.ng-leave           { -webkit-animation: fadeOut 0.4s both ease-in-out; animation: fadeOut 0.4s both ease-in-out; z-index: 9999; position: absolute; width: 100%; }

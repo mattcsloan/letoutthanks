@@ -4,5 +4,13 @@
     </div>
 </div>
 <div class="wrapper">
-	<a href="/account/reset-password">Reset password</a>
+	<a class="btn logout" href="#" ng-click="logout()">Logout</a>
+	<div class="card">
+		<h2>My Notes</h2>
+		<p><a href="/notes/by/me">View previous notes</a></p>
+	</div>
+	<div class="card">
+		<h2>Account Settings</h2>
+		<p><strong>{{ currentUser.username }}</strong>: <a href="/account/reset-password">Reset password</a></p>
+	</div>
 </div>
