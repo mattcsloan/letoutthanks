@@ -71,8 +71,9 @@ angular.module('AccountCtrl', ['ngAnimate']).controller('AccountController', ['$
 		$location.url('/account/login');
 	};
 
-	$scope.$on('$routeChangeSuccess', function () {
+	$scope.$on('$routeChangeSuccess', function (event, data) {
 		$scope.errormessage = '';
+		$scope.pageTitle = data.title + ' | Let Out Thanks';
 	});
 
 }]);

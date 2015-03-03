@@ -1,6 +1,7 @@
 angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 	$routeProvider
 		.when('/', {
+			title: 'Home',
 			templateUrl: '../views/home.html',
 			controller: 'NotesController'
 		})
@@ -36,48 +37,58 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 		})
 
 		.when('/about', {
+			title: 'About Us',
 			templateUrl: '../views/about/index.html'
 		})
 
 		.when('/privacy', {
+			title: 'Privacy Policy',
 			templateUrl: '../views/privacy.html'
 		})
 
 		.when('/contact', {
+			title: 'Contact Us',
 			templateUrl: '../views/contact.html'
 		})
 
 		.when('/notes', {
+			title: 'All Thank You Notes',
 			templateUrl: '../views/notes/index.html',
 			controller: 'NotesController'
 		})
 
 		.when('/notes/by/me', {
+			title: 'My Thank You Notes',
 			templateUrl: '../views/notes/currentuser.html',
 			controller: 'NotesController'
 		})
 
 		.when('/notes/by/:user', {
+			title: 'User Thank You Notes',
 			templateUrl: '../views/notes/user.html',
 			controller: 'NotesController'
 		})
 
 		.when('/notes/create', {
+			title: 'Create Thank You Note',
 			templateUrl: '../views/notes/create.html',
 			controller: 'NotesController'
 		})
 
 		.when('/notes/edit/:id', {
+			title: 'Edit Thank You Note',
 			templateUrl: '../views/notes/edit.html',
 			controller: 'NotesController'
 		})
 
 		.when('/notes/:id', {
+			title: 'Thank You Note',
 			templateUrl: '../views/notes/view.html',
 			controller: 'NotesController'
 		})
 
 		.otherwise({
+			title: 'Page Not Found',
 			templateUrl:'../views/404.html'
 		});
 

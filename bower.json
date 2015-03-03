@@ -1,8 +1,11 @@
 {
-	"name": "letoutthanks",
-	"version": "1.0.0",
-	"dependencies": {
-		"angular": "latest",
-		"angular-route": "latest"
-	}
+  "name": "letoutthanks",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular": "latest",
+    "angular-route": "latest",
+    "angular-bootstrap": "~0.12.1",
+    "tinymce": "~4.1.7",
+    "jquery": "1.11.2"
+  }
 }

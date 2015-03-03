@@ -24,7 +24,7 @@ angular.module('NoteService', []).factory('NoteSvc', function($http) {
 		return $http.post('/api/notes', noteData);
 	},
 
-	o.getNote = function(id) {
+	o.getNote = function(id) { 
 		return $http.get('/api/notes/' + id);
 	}
 
