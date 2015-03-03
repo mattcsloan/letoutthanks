@@ -4,7 +4,7 @@ var bcrypt = require('bcrypt');
 var jwt = require('jwt-simple');
 var config = require('../config/db');
 var auth = require('./auth');
-var websockets = require('./websockets');
+//var websockets = require('./websockets');
 var emails = require('./emails');
 var nodemailer = require('nodemailer');
 
@@ -35,7 +35,7 @@ module.exports = function(app) {
 				if(err) {
 					res.send(err);
 				}
-				websockets.broadcast('note_update', note);
+				//websockets.broadcast('note_update', note);
 				res.json(201, notes);
 			});
 		//} else {
@@ -96,7 +96,7 @@ module.exports = function(app) {
 					if(err) {
 						res.send(err);
 					}
-					websockets.broadcast('note_update', note);
+					//websockets.broadcast('note_update', note);
 					res.json(201, note);
 				});
 		  	}
@@ -114,7 +114,7 @@ module.exports = function(app) {
 					if(err) {
 						res.send(err);
 					}
-					websockets.broadcast('note_update', note);
+					//websockets.broadcast('note_update', note);
 					res.json();
 				});
 		  	}

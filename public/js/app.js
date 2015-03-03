@@ -18,21 +18,21 @@ angular.module('thankYou',
 			var url = 'ws://' + window.location.host;
 		}
 
-		var connection = new WebSocket(url);
+		// var connection = new WebSocket(url);
 
-		connection.onopen = function() {
-			console.log('Websocket connected');
-		}
+		// connection.onopen = function() {
+		// 	console.log('Websocket connected');
+		// }
 
-		connection.onclose = function(e) {
-			console.log('Websocket closed. Reconnecting...');
-			$timeout(connect, 10*1000);
-		}
+		// connection.onclose = function(e) {
+		// 	console.log('Websocket closed. Reconnecting...');
+		// 	$timeout(connect, 10*1000);
+		// }
 
-		connection.onmessage = function(e) {
-			console.log(e);
-			var payload = JSON.parse(e.data);
-			$rootScope.$broadcast('ws:' + payload.topic, payload.data);
-		}
+		// connection.onmessage = function(e) {
+		// 	console.log(e);
+		// 	var payload = JSON.parse(e.data);
+		// 	$rootScope.$broadcast('ws:' + payload.topic, payload.data);
+		// }
 	})();
 });

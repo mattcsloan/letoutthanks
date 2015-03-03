@@ -22,9 +22,9 @@ angular.module('NotesCtrl', []).controller('NotesController', ['$scope', '$route
  	};
 
  	//use websockets to push new note/edit note/delete note on All Notes page for all current user sessions
- 	$scope.$on('ws:note_update', function(_, note) {
-		$scope.getNotes();
- 	});
+ 	// $scope.$on('ws:note_update', function(_, note) {
+		// $scope.getNotes();
+ 	// });
 
 	$scope.getNotesByUser = function() {
 		var user = $routeParams.user;
